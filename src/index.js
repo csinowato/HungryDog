@@ -13,9 +13,9 @@ But this hasn't happened yet!
 import "phaser";
 import config from "./config/config";
 
-// import MainScene from "./scenes/MainScene";
-// import BgScene from "./scenes/BgScene";
-// import FgScene from "./scenes/FgScene";
+import MainScene from "./scenes/MainScene";
+import BgScene from "./scenes/BgScene";
+import FgScene from "./scenes/FgScene";
 
 class Game extends Phaser.Game {
   constructor() {
@@ -23,12 +23,12 @@ class Game extends Phaser.Game {
     super(config);
 
     // Add all the scenes
-    // this.scene.add("BgScene", BgScene);
-    // this.scene.add("FgScene", FgScene);
-    // this.scene.add("MainScene", MainScene);
+    this.scene.add("BgScene", BgScene);
+    this.scene.add("FgScene", FgScene);
+    this.scene.add("MainScene", MainScene);
 
     // Start the game with the mainscene
-    // this.scene.start("MainScene");
+    this.scene.start("MainScene");
   }
 }
 // Create new instance of game
