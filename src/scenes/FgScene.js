@@ -17,6 +17,7 @@ export default class FgScene extends Phaser.Scene {
       frameHeight: 48,
     });
   }
+
   create() {
     // Create ground group
     this.createGroups();
