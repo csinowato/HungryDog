@@ -123,12 +123,12 @@ export default class FgScene extends Phaser.Scene {
 
   //Helper function for continuously dropping items
   itemDrop() {
-    let xAxis = Math.floor(Math.random() * 1000);
-    let edibleOrInedible = Math.floor(Math.random() * 4);
-    // create and drop inedible food 1/4 of the time
-    if (edibleOrInedible === 3) {
+    let xAxis = Math.floor(Math.random() * 950);
+    let edibleOrInedible = Math.floor(Math.random() * 3);
+    // create and drop inedible food 1/3 of the time
+    if (edibleOrInedible === 2) {
       this.createInedibles(xAxis, 20);
-      // create and drop an edible food 3/4 of the time
+      // create and drop an edible food 2/3 of the time
     } else {
       this.createEdibles(xAxis, 20);
     }
@@ -181,6 +181,7 @@ export default class FgScene extends Phaser.Scene {
 
   // when player collects edible food, make food disappear, and increase score
   collectEdibles(player, edible) {
+    player.clearTint();
     edible.disableBody(true, true);
     score += 10;
     scoreText.setText(`score: ${score}`);
@@ -188,6 +189,7 @@ export default class FgScene extends Phaser.Scene {
 
   // if player catches inedible food, make food disappear, decrease lives
   collectInedibles(player, inedible) {
+    player.setTint(0xce6161);
     inedible.disableBody(true, true);
     lives -= 1;
     livesText.setText(`lives: ${lives}`);
