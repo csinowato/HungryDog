@@ -25,6 +25,7 @@ export default class FgScene extends Phaser.Scene {
     this.player = new Player(this, 20, 400, "player").setScale(2);
 
     // Create animations
+    this.createAnimations();
 
     // Assign cursors
     this.cursors = this.input.keyboard.createCursorKeys();
@@ -51,5 +52,27 @@ export default class FgScene extends Phaser.Scene {
 
   createCollisions() {
     this.physics.add.collider(this.player, this.groundGroup);
+  }
+
+  createAnimations() {
+    this.anims.create({
+      key: "left",
+      frames: this.anims.generateFrameNumbers("player", { start: 0, end: 3 }),
+      frameRate: 10,
+      repeat: -1, //repeat forever
+    });
+
+    this.anims.create({
+      key: "forward",
+      frames: [{ key: "player", frame: 4 }],
+      frameRate: 20,
+    });
+
+    this.anims.create({
+      key: "right",
+      frames: this.anims.generateFrameNumbers("player", { start: 5, end: 8 }),
+      frameRate: 10,
+      repeat: -1, //repeat forever
+    });
   }
 }
