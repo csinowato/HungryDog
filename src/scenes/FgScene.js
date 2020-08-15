@@ -3,6 +3,9 @@ import Player from "../entity/Player";
 import Ground from "../entity/Ground";
 import Edibles from "../entity/Edibles";
 
+let score = 0;
+let scoreText;
+
 export default class FgScene extends Phaser.Scene {
   constructor() {
     super("FgScene");
@@ -36,6 +39,12 @@ export default class FgScene extends Phaser.Scene {
   }
 
   create() {
+    //create scoretext
+    scoreText = this.add.text(16, 16, "score: 0", {
+      fontSize: "30px",
+      fill: "#000",
+    });
+
     // Create ground group
     this.createGroups();
 
@@ -126,7 +135,10 @@ export default class FgScene extends Phaser.Scene {
     });
   }
 
+  // when player collects edible fruit, make fruit disappear, and increase score
   collectEdibles(player, edible) {
     edible.disableBody(true, true);
+    score += 10;
+    scoreText.setText(`score: ${score}`);
   }
 }
