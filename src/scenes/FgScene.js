@@ -12,9 +12,9 @@ export default class FgScene extends Phaser.Scene {
     this.load.image("ground", "assets/sprites/ground2.png");
 
     // Preload spritesheet
-    this.load.spritesheet("player", "assets/spriteSheets/player.png", {
-      frameWidth: 32,
-      frameHeight: 48,
+    this.load.spritesheet("player", "assets/spriteSheets/dog.png", {
+      frameWidth: 300,
+      frameHeight: 400,
     });
   }
 
@@ -23,7 +23,7 @@ export default class FgScene extends Phaser.Scene {
     this.createGroups();
 
     // Load entities
-    this.player = new Player(this, 20, 400, "player").setScale(2);
+    this.player = new Player(this, 20, 400, "player").setScale(0.2);
 
     // Create animations
     this.createAnimations();
@@ -58,20 +58,20 @@ export default class FgScene extends Phaser.Scene {
   createAnimations() {
     this.anims.create({
       key: "left",
-      frames: this.anims.generateFrameNumbers("player", { start: 0, end: 3 }),
+      frames: this.anims.generateFrameNumbers("player", { start: 0, end: 1 }),
       frameRate: 10,
       repeat: -1, //repeat forever
     });
 
     this.anims.create({
       key: "forward",
-      frames: [{ key: "player", frame: 4 }],
+      frames: [{ key: "player", frame: 2 }],
       frameRate: 20,
     });
 
     this.anims.create({
       key: "right",
-      frames: this.anims.generateFrameNumbers("player", { start: 5, end: 8 }),
+      frames: this.anims.generateFrameNumbers("player", { start: 3, end: 4 }),
       frameRate: 10,
       repeat: -1, //repeat forever
     });
