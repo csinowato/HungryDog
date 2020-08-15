@@ -10,12 +10,15 @@ let scoreText;
 let lives = 3;
 let livesText;
 
+let dropDelay = 4000;
+
 export default class FgScene extends Phaser.Scene {
   constructor() {
     super("FgScene");
 
     // bind functions
     this.collectEdibles = this.collectEdibles.bind(this);
+    this.collectIndibles = this.collectInedibles.bind(this);
   }
 
   preload() {
@@ -103,13 +106,32 @@ export default class FgScene extends Phaser.Scene {
     this.createGround(480, 560);
 
     this.ediblesGroup = this.physics.add.group({ classType: Edibles });
-    // Make x-coordinate for food drop random
+    // Drop one edible food immediately when game starts
     let edibleXaxis = Math.floor(Math.random() * 1000);
     this.createEdibles(edibleXaxis, 0);
 
     this.inediblesGroup = this.physics.add.group({ classType: Inedibles });
-    let inedibleXaxis = Math.floor(Math.random() * 1000);
-    this.createInedibles(inedibleXaxis, 0);
+
+    // continually make objects fall using timer
+    this.time.addEvent({
+      delay: dropDelay,
+      callback: this.itemDrop, //calling the helper function
+      callbackScope: this,
+      loop: true,
+    });
+  }
+
+  //Helper function for continuously dropping items
+  itemDrop() {
+    let xAxis = Math.floor(Math.random() * 1000);
+    let edibleOrInedible = Math.floor(Math.random() * 4);
+    // create and drop inedible food 1/4 of the time
+    if (edibleOrInedible === 3) {
+      this.createInedibles(xAxis, 20);
+      // create and drop an edible food 3/4 of the time
+    } else {
+      this.createEdibles(xAxis, 20);
+    }
   }
 
   createCollisions() {
