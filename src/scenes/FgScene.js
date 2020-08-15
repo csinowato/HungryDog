@@ -1,6 +1,7 @@
 import "phaser";
 import Player from "../entity/Player";
 import Ground from "../entity/Ground";
+import Edibles from "../entity/Edibles";
 
 export default class FgScene extends Phaser.Scene {
   constructor() {
@@ -8,8 +9,21 @@ export default class FgScene extends Phaser.Scene {
   }
 
   preload() {
-    // Preload images
     this.load.image("ground", "assets/sprites/ground2.png");
+
+    // Preload edibles
+    this.load.image("apple", "assets/sprites/edible/apple.png");
+    this.load.image("banana", "assets/sprites/edible/banana.png");
+    this.load.image("carrot", "assets/sprites/edible/carrot.png");
+    this.load.image("strawberry", "assets/sprites/edible/strawberry.png");
+    this.load.image("watermelon", "assets/sprites/edible/watermelon.png");
+
+    // Preload inedibles
+    this.load.image("cherries", "assets/sprites/inedible/cherries.png");
+    this.load.image("garlic", "assets/sprites/inedible/garlic.png");
+    this.load.image("grapes", "assets/sprites/inedible/grapes.png");
+    this.load.image("onion", "assets/sprites/inedible/onion.png");
+    this.load.image("redonion", "assets/sprites/inedible/redonion.png");
 
     // Preload spritesheet
     this.load.spritesheet("player", "assets/spriteSheets/dog.png", {
@@ -23,7 +37,9 @@ export default class FgScene extends Phaser.Scene {
     this.createGroups();
 
     // Load entities
-    this.player = new Player(this, 20, 400, "player").setScale(0.2);
+    this.player = new Player(this, 220, 350, "player").setScale(0.2);
+
+    //Load food
 
     // Create animations
     this.createAnimations();
