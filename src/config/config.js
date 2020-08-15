@@ -9,7 +9,7 @@ export default {
   physics: {
     default: "arcade",
     arcade: {
-      gravity: { y: 1500 }, // Game objects will be pulled down along y-axis
+      gravity: { y: 1000 }, // Game objects will be pulled down along y-axis
       // The higher the number the stronger the pull (i.e. falls faster)
       debug: false,
     },

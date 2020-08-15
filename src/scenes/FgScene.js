@@ -61,14 +61,30 @@ export default class FgScene extends Phaser.Scene {
     this.groundGroup.create(x, y, "ground").setScale(0.6).refreshBody();
   }
 
+  createEdibles(x, y) {
+    // To do: Randomly select edible object *** --------------------------------------------------------------
+    this.ediblesGroup.create(x, y, "apple").setScale(0.08).refreshBody();
+  }
+
   // Make all groups
   createGroups() {
     this.groundGroup = this.physics.add.staticGroup({ classType: Ground });
     this.createGround(500, 560);
+
+    this.ediblesGroup = this.physics.add.group({
+      classType: Edibles,
+      //   key: "apple",
+      //   repeat: 5,
+      //   setXY: { x: 0.1, y: 0.1, stepX: 200 },
+    });
+    // To do: Make placement random as well *** --------------------------------------------------------------
+    this.createEdibles(100, 100);
   }
 
   createCollisions() {
     this.physics.add.collider(this.player, this.groundGroup);
+
+    // this.physics.add.collider(this.player, this.ediblesGroup); //Not Working
   }
 
   createAnimations() {
