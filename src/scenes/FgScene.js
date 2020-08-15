@@ -40,6 +40,7 @@ export default class FgScene extends Phaser.Scene {
     this.player = new Player(this, 220, 350, "player").setScale(0.2);
 
     //Load food
+    this.banana = new Edibles(this, 200, 200, "banana").setScale(0.1); //TESTING ------
 
     // Create animations
     this.createAnimations();
@@ -63,13 +64,22 @@ export default class FgScene extends Phaser.Scene {
 
   createEdibles(x, y) {
     // To do: Randomly select edible object *** --------------------------------------------------------------
-    this.ediblesGroup.create(x, y, "apple").setScale(0.08).refreshBody();
+    let edibleObjects = [
+      "apple",
+      "banana",
+      "carrot",
+      "strawberry",
+      "watermelon",
+    ];
+    let randomIdx = Math.floor(Math.random() * 5);
+    // Select random edible object
+    this.ediblesGroup.create(x, y, edibleObjects[randomIdx]).setScale(0.09);
   }
 
   // Make all groups
   createGroups() {
     this.groundGroup = this.physics.add.staticGroup({ classType: Ground });
-    this.createGround(500, 560);
+    this.createGround(480, 560);
 
     this.ediblesGroup = this.physics.add.group({
       classType: Edibles,
@@ -78,13 +88,16 @@ export default class FgScene extends Phaser.Scene {
       //   setXY: { x: 0.1, y: 0.1, stepX: 200 },
     });
     // To do: Make placement random as well *** --------------------------------------------------------------
-    this.createEdibles(100, 100);
+    let foodXaxis = Math.floor(Math.random() * 1000);
+    this.createEdibles(foodXaxis, 0);
   }
 
   createCollisions() {
     this.physics.add.collider(this.player, this.groundGroup);
 
-    // this.physics.add.collider(this.player, this.ediblesGroup); //Not Working
+    this.physics.add.collider(this.player, this.ediblesGroup); //working but ground is falling
+    this.physics.add.collider(this.player, this.banana); //Also not working
+    this.physics.add.collider(this.banana, this.ground);
   }
 
   createAnimations() {

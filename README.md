@@ -1,4 +1,4 @@
-# FullBlast Academy
+# Hungry Dog
 
 To Play the Game:
 
