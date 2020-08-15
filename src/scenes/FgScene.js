@@ -6,6 +6,9 @@ import Edibles from "../entity/Edibles";
 export default class FgScene extends Phaser.Scene {
   constructor() {
     super("FgScene");
+
+    // bind functions
+    this.collectEdibles = this.collectEdibles.bind(this);
   }
 
   preload() {
@@ -89,7 +92,16 @@ export default class FgScene extends Phaser.Scene {
 
   createCollisions() {
     this.physics.add.collider(this.player, this.groundGroup);
-    this.physics.add.collider(this.player, this.ediblesGroup);
+    // this.physics.add.collider(this.player, this.ediblesGroup);
+
+    // when player collides with edibles, use the collectEdibles function to remove (disable) fruit
+    this.physics.add.overlap(
+      this.player,
+      this.ediblesGroup,
+      this.collectEdibles,
+      null,
+      this
+    );
   }
 
   createAnimations() {
@@ -112,5 +124,9 @@ export default class FgScene extends Phaser.Scene {
       frameRate: 10,
       repeat: -1, //repeat forever
     });
+  }
+
+  collectEdibles(player, edible) {
+    edible.disableBody(true, true);
   }
 }
