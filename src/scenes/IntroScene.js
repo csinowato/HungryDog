@@ -18,6 +18,8 @@ export default class IntroScene extends Phaser.Scene {
     this.load.image("clouds2", "assets/backgrounds/clouds2.png");
     this.load.image("mountains", "assets/backgrounds/mountains.png");
     this.load.image("button", "assets/sprites/button.png");
+    this.load.image("introDog", "assets/sprites/introDog.png");
+    this.load.image("border", "assets/backgrounds/borderframe.png");
   }
 
   create() {
@@ -26,15 +28,17 @@ export default class IntroScene extends Phaser.Scene {
     this.add.image(0, -10, "sky2").setOrigin(0).setScale(0.6);
     this.add.image(0, -120, "clouds2").setOrigin(0).setScale(0.6);
     this.add.image(-10, 350, "mountains").setOrigin(0).setScale(0.6);
+    this.add.image(300, 305, "introDog").setOrigin(0).setScale(1.1);
+    this.add.image(25, 15, "border").setOrigin(0).setScale(0.63);
 
-    let title = this.add.text(250, 50, "HUNGRY DOG", {
+    let title = this.add.text(250, 70, "HUNGRY DOG", {
       fontFamily: "Tahoma",
       fontSize: "80px",
       fill: "white",
     });
     title.setShadow(2, 2, "DarkSlateGray", 5);
 
-    let description = this.add.text(250, 190, "Select a level to play", {
+    let description = this.add.text(250, 200, "Select a level to play", {
       fontFamily: "Tahoma",
       fontSize: "28px",
       fill: "white",
