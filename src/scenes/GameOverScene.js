@@ -1,18 +1,18 @@
 import "phaser";
+import Button from "../entity/Button";
 
 let scoreData;
 let scoreText;
 
+let textStyling = {
+  fontFamily: "Tahoma",
+  fontSize: "24px",
+  fill: "white",
+};
+
 export default class GameOverScene extends Phaser.Scene {
   constructor() {
     super("GameOverScene");
-  }
-
-  preload() {
-    // Preload Sprites
-    this.load.image("sky", "assets/backgrounds/sky.png");
-    this.load.image("clouds", "assets/backgrounds/clouds.png");
-    this.load.image("mountains", "assets/backgrounds/mountains.png");
   }
 
   //score is passed in from FgScene
@@ -20,24 +20,47 @@ export default class GameOverScene extends Phaser.Scene {
     if (typeof score !== "number") scoreData = 0;
     else scoreData = score;
 
-    // add images to the scene by giving it the x and y coordinate
-    // set scale changes image size
-    this.add.image(0, -10, "sky").setOrigin(0).setScale(0.6);
-    this.add.image(-100, 0, "clouds").setOrigin(0).setScale(0.6);
+    this.add.image(0, -10, "sky2").setOrigin(0).setScale(0.6);
+    this.add.image(-100, 0, "clouds2").setOrigin(0).setScale(0.6);
     this.add.image(-10, 350, "mountains").setOrigin(0).setScale(0.6);
 
-    let gameOver = this.add.text(300, 170, "GAME OVER", {
-      fontFamily: "Tahoma",
-      fontSize: "80px",
-      fill: "white",
-    });
+    let xAxisCenter =
+      this.cameras.main.worldView.x + this.cameras.main.width / 2;
+
+    let gameOver = this.add
+      .text(xAxisCenter, 160, "GAME OVER", {
+        fontFamily: "Tahoma",
+        fontSize: "80px",
+        fill: "white",
+      })
+      .setOrigin(0.5);
     gameOver.setShadow(2, 2, "DarkSlateGray", 5);
 
-    scoreText = this.add.text(410, 300, `Score: ${scoreData}`, {
-      fontFamily: "Tahoma",
-      fontSize: "45px",
-      fill: "white",
-    });
+    scoreText = this.add
+      .text(xAxisCenter, 280, `Score: ${scoreData}`, {
+        fontFamily: "Tahoma",
+        fontSize: "45px",
+        fill: "white",
+      })
+      .setOrigin(0.5);
     scoreText.setShadow(2, 2, "DarkSlateGray", 2);
+
+    this.playAgainButton = new Button(
+      this,
+      xAxisCenter,
+      430,
+      "button"
+    ).setScale(0.28);
+
+    let buttonText = this.add
+      .text(xAxisCenter, 430, "Play Again", textStyling)
+      .setOrigin(0.5);
+    buttonText.setShadow(2, 2, "DarkSlateGray", 5);
+
+    // If play again button is clicked, go back to intro page
+    this.playAgainButton.on("pointerdown", () => {
+      console.log("---- PLAY AGAIN ---");
+      this.scene.start("IntroScene");
+    });
   }
 }

@@ -24,7 +24,7 @@ export default class IntroScene extends Phaser.Scene {
     // add images to the scene by giving it the x and y coordinate
     // set scale changes image size
     this.add.image(0, -10, "sky2").setOrigin(0).setScale(0.6);
-    this.add.image(0, -100, "clouds2").setOrigin(0).setScale(0.6);
+    this.add.image(0, -120, "clouds2").setOrigin(0).setScale(0.6);
     this.add.image(-10, 350, "mountains").setOrigin(0).setScale(0.6);
 
     let title = this.add.text(250, 50, "HUNGRY DOG", {
