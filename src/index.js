@@ -28,7 +28,7 @@ class Game extends Phaser.Game {
     this.scene.add("MainScene", MainScene);
 
     // Start the game with the mainscene
-    this.scene.start("MainScene");
+    this.scene.start("MainScene", "impossible"); //TESTING USING LEVELS (4000 is the drop delay)
   }
 }
 // Create new instance of game

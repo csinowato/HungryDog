@@ -5,9 +5,9 @@ export default class MainScene extends Phaser.Scene {
     super("MainScene");
   }
 
-  create() {
+  create(difficulty) {
     // << LOAD BACKGROUND AND FOREGROUND SCENES IN PARALLEL HERE >>
     this.scene.launch("BgScene");
-    this.scene.launch("FgScene");
+    this.scene.launch("FgScene", difficulty); //PASS IN DATA
   }
 }

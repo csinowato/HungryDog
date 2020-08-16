@@ -5,11 +5,11 @@ import Edibles from "../entity/Edibles";
 import Inedibles from "../entity/Inedibles";
 import Hearts from "../entity/Hearts";
 
-let lives = 3;
 let score = 0;
 let scoreText;
-
-let dropDelay = 4000;
+let lives = 3;
+let livesText;
+let dropDelay;
 
 export default class FgScene extends Phaser.Scene {
   constructor() {
@@ -45,7 +45,26 @@ export default class FgScene extends Phaser.Scene {
     });
   }
 
-  create() {
+  create(difficulty) {
+    console.log("DIFFICULTY --->", difficulty); //TESTING ---------------------------------------------------------------
+    // Adjusting difficulty to user specified level
+    // User should get more points for harder levels
+    switch (difficulty) {
+      case "easy":
+        dropDelay = 2000;
+        break;
+      case "medium":
+        dropDelay = 1000;
+        break;
+      case "hard":
+        dropDelay = 500;
+        break;
+      case "impossible":
+        dropDelay = 200;
+        break;
+    }
+    //TESTING -----------------------------------------------------------------------------------------
+
     //create scoretext
     scoreText = this.add.text(20, 15, "score: 0", {
       fontFamily: "Tahoma",
@@ -126,7 +145,7 @@ export default class FgScene extends Phaser.Scene {
 
     // continually make objects fall using timer
     this.time.addEvent({
-      delay: dropDelay,
+      delay: dropDelay, // ----> THIS DOESNT UPDATE OVER TIME ------------------------------------------------------------
       callback: this.itemDrop, //calling the helper function
       callbackScope: this,
       loop: true,
@@ -148,7 +167,6 @@ export default class FgScene extends Phaser.Scene {
 
   createCollisions() {
     this.physics.add.collider(this.player, this.groundGroup);
-    // this.physics.add.collider(this.player, this.ediblesGroup);
 
     // when player collides with edibles, use the collectEdibles function to remove (disable) food
     this.physics.add.overlap(
@@ -204,6 +222,7 @@ export default class FgScene extends Phaser.Scene {
     player.setTint(0xce6161);
     inedible.disableBody(true, true);
     lives -= 1;
+    this.player.setBounce(0.2);
 
     // console.log(this.heartsGroup.children.entries[0]);
     this.heartsGroup.children.entries[lives].destroy();
