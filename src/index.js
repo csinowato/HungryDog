@@ -16,6 +16,7 @@ import config from "./config/config";
 import MainScene from "./scenes/MainScene";
 import BgScene from "./scenes/BgScene";
 import FgScene from "./scenes/FgScene";
+import GameOverScene from "./scenes/GameoverScene";
 
 class Game extends Phaser.Game {
   constructor() {
@@ -26,9 +27,12 @@ class Game extends Phaser.Game {
     this.scene.add("BgScene", BgScene);
     this.scene.add("FgScene", FgScene);
     this.scene.add("MainScene", MainScene);
+    this.scene.add("GameOverScene", GameOverScene);
 
     // Start the game with the mainscene
-    this.scene.start("MainScene", 1); //TESTING USING LEVELS (4000 is the drop delay)
+    // second argument is the difficulty
+    // (1: easy, 1.5: medium, 2: hard, 2.5: superhard, 3: impossible)
+    this.scene.start("MainScene", 1);
   }
 }
 // Create new instance of game

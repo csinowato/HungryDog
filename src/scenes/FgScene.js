@@ -136,7 +136,7 @@ export default class FgScene extends Phaser.Scene {
 
     // continually make objects fall using timer
     this.time.addEvent({
-      delay: dropDelay, // ----> THIS DOESNT UPDATE OVER TIME ------------------------------------------------------------
+      delay: dropDelay,
       callback: this.itemDrop, //calling the helper function
       callbackScope: this,
       loop: true,
@@ -217,5 +217,9 @@ export default class FgScene extends Phaser.Scene {
 
     // console.log(this.heartsGroup.children.entries[0]);
     this.heartsGroup.children.entries[lives].destroy();
+
+    if (lives === 0) {
+      this.scene.start("GameOverScene", score);
+    }
   }
 }
