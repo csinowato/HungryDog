@@ -4,6 +4,7 @@ import Ground from "../entity/Ground";
 import Edibles from "../entity/Edibles";
 import Inedibles from "../entity/Inedibles";
 import Hearts from "../entity/Hearts";
+import Button from "../entity/Button";
 
 let score = 0;
 let scoreText;
@@ -24,6 +25,7 @@ export default class FgScene extends Phaser.Scene {
   preload() {
     this.load.image("ground", "assets/sprites/ground2.png");
     this.load.image("hearts", "assets/sprites/heart.png");
+    this.load.image("exit", "assets/sprites/exit.png");
 
     // Preload edibles
     this.load.image("apple", "assets/sprites/edible/apple.png");
@@ -70,6 +72,13 @@ export default class FgScene extends Phaser.Scene {
       fontSize: "36px",
       fill: "#000",
       backgroundColor: "white",
+    });
+
+    this.exitButton = new Button(this, 960, 38, "exit")
+      .setScale(0.08)
+      .setInteractive();
+    this.exitButton.on("pointerdown", () => {
+      this.scene.start("GameOverScene", score);
     });
 
     // Create ground group
