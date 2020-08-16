@@ -206,7 +206,7 @@ export default class FgScene extends Phaser.Scene {
       key: "right",
       frames: this.anims.generateFrameNumbers("player", { start: 3, end: 4 }),
       frameRate: 10,
-      repeat: -1, //repeat forever
+      repeat: -1,
     });
   }
 
@@ -225,7 +225,6 @@ export default class FgScene extends Phaser.Scene {
     lives -= 1;
     this.player.setBounce(0.2);
 
-    // console.log(this.heartsGroup.children.entries[0]);
     this.heartsGroup.children.entries[lives].destroy();
 
     if (lives === 0) {

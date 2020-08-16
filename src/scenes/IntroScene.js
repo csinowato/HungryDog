@@ -61,6 +61,10 @@ export default class IntroScene extends Phaser.Scene {
     let levels = [easy, medium, hard, veryHard, impossible];
     levels.forEach((i) => i.setShadow(2, 2, "DarkSlateGray", 5));
 
+    // Start the game scene after the user clicks a difficulty level
+    // second argument is the difficulty
+    // (1: easy, 1.5: medium, 2: hard, 2.5: very hard, 3: impossible)
+
     // Easy
     this.buttonsGroup.children.entries[0].on("pointerdown", () => {
       this.scene.start("MainScene", 1);
