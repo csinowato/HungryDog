@@ -17,6 +17,7 @@ import MainScene from "./scenes/MainScene";
 import BgScene from "./scenes/BgScene";
 import FgScene from "./scenes/FgScene";
 import GameOverScene from "./scenes/GameoverScene";
+import IntroScene from "./scenes/IntroScene";
 
 class Game extends Phaser.Game {
   constructor() {
@@ -28,11 +29,12 @@ class Game extends Phaser.Game {
     this.scene.add("FgScene", FgScene);
     this.scene.add("MainScene", MainScene);
     this.scene.add("GameOverScene", GameOverScene);
+    this.scene.add("IntroScene", IntroScene);
 
     // Start the game with the mainscene
     // second argument is the difficulty
     // (1: easy, 1.5: medium, 2: hard, 2.5: very hard, 3: impossible)
-    this.scene.start("MainScene", 1);
+    this.scene.start("IntroScene");
   }
 }
 // Create new instance of game
