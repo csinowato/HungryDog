@@ -10,6 +10,7 @@ let scoreText;
 let lives = 3;
 let livesText;
 let dropDelay;
+let difficultyLvl;
 
 export default class FgScene extends Phaser.Scene {
   constructor() {
@@ -47,23 +48,13 @@ export default class FgScene extends Phaser.Scene {
 
   create(difficulty) {
     console.log("DIFFICULTY --->", difficulty); //TESTING ---------------------------------------------------------------
-    // Adjusting difficulty to user specified level
-    // User should get more points for harder levels
-    switch (difficulty) {
-      case "easy":
-        dropDelay = 2000;
-        break;
-      case "medium":
-        dropDelay = 1000;
-        break;
-      case "hard":
-        dropDelay = 500;
-        break;
-      case "impossible":
-        dropDelay = 200;
-        break;
-    }
-    //TESTING -----------------------------------------------------------------------------------------
+    // Adjusting difficulty to user specified level (1: easy, 1.5: medium, 2: hard, 2.5: superhard, 3: impossible)
+    // Map difficulty to dropDelay and update global difficultyLvl
+    let difficultyToDelay = { 1: 2000, 1.5: 1000, 2: 500, 2.5: 200, 3: 100 };
+    dropDelay = difficultyToDelay[difficulty];
+    difficultyLvl = difficulty;
+
+    //-----------------------------------------------------------------------------------------
 
     //create scoretext
     scoreText = this.add.text(20, 15, "score: 0", {
@@ -213,7 +204,7 @@ export default class FgScene extends Phaser.Scene {
   collectEdibles(player, edible) {
     player.clearTint();
     edible.disableBody(true, true);
-    score += 10;
+    score += difficultyLvl * 10;
     scoreText.setText(`score: ${score}`);
   }
 
