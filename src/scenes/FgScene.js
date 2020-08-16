@@ -63,7 +63,7 @@ export default class FgScene extends Phaser.Scene {
     dropDelay = difficultyToDelay[difficulty];
     difficultyLvl = difficulty;
 
-    //create scoretext
+    // create score text
     scoreText = this.add.text(20, 15, "score: 0", {
       fontFamily: "Tahoma",
       fontSize: "30px",
@@ -71,18 +71,25 @@ export default class FgScene extends Phaser.Scene {
     });
     scoreText.setShadow(2, 2, "DarkSlateGray", 2);
 
-    //create box for lives
+    // create box for lives
     livesText = this.add.text(16, 60, "      ", {
       fontSize: "36px",
       fill: "#000",
       backgroundColor: "white",
     });
 
+    // exit button
     this.exitButton = new Button(this, 960, 38, "exit")
       .setScale(0.08)
       .setInteractive();
     this.exitButton.on("pointerdown", () => {
       this.scene.start("GameOverScene", score);
+    });
+    this.exitButton.on("pointerover", () => {
+      this.exitButton.setScale(0.1).setTint(0xfc8fa0);
+    });
+    this.exitButton.on("pointerout", () => {
+      this.exitButton.setScale(0.08).clearTint();
     });
 
     // Create ground group

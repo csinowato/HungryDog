@@ -58,5 +58,11 @@ export default class GameOverScene extends Phaser.Scene {
     this.playAgainButton.on("pointerdown", () => {
       this.scene.start("IntroScene");
     });
+    this.playAgainButton.on("pointerover", () => {
+      this.playAgainButton.setScale(0.31).setTint(0xfc8fa0);
+    });
+    this.playAgainButton.on("pointerout", () => {
+      this.playAgainButton.setScale(0.28).clearTint();
+    });
   }
 }

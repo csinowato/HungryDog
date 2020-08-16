@@ -56,6 +56,13 @@ export default class IntroScene extends Phaser.Scene {
 
     this.buttonsGroup.children.iterate((child) => {
       child.setScale(0.25).setInteractive(); // Allow user to click
+      child.on("pointerover", () => {
+        // button animation when user mouses over it
+        child.setScale(0.28).setTint(0xfc8fa0);
+      });
+      child.on("pointerout", () => {
+        child.setScale(0.25).clearTint();
+      });
     });
 
     let easy = this.add.text(675, 204, "Easy", textStyling);
@@ -101,6 +108,12 @@ export default class IntroScene extends Phaser.Scene {
       .setInteractive();
     this.infoButton.on("pointerdown", () => {
       this.scene.start("InformationScene");
+    });
+    this.infoButton.on("pointerover", () => {
+      this.infoButton.setScale(0.09).setTint(0x61edf6);
+    });
+    this.infoButton.on("pointerout", () => {
+      this.infoButton.setScale(0.08).clearTint();
     });
   }
 }

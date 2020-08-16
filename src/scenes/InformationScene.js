@@ -36,5 +36,11 @@ export default class InformationScene extends Phaser.Scene {
     this.mainMenuButton.on("pointerdown", () => {
       this.scene.start("IntroScene");
     });
+    this.mainMenuButton.on("pointerover", () => {
+      this.mainMenuButton.setScale(0.28).setTint(0xfc8fa0);
+    });
+    this.mainMenuButton.on("pointerout", () => {
+      this.mainMenuButton.setScale(0.25).clearTint();
+    });
   }
 }
