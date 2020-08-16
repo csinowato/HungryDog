@@ -54,7 +54,7 @@ export default class IntroScene extends Phaser.Scene {
     });
 
     this.buttonsGroup.children.iterate((child) => {
-      child.setScale(0.25).setInteractive(); // Enable user to click
+      child.setScale(0.25).setInteractive(); // Allow user to click
     });
 
     let easy = this.add.text(675, 204, "Easy", textStyling);
@@ -67,7 +67,7 @@ export default class IntroScene extends Phaser.Scene {
     levels.forEach((i) => i.setShadow(2, 2, "DarkSlateGray", 5));
 
     // Start the game scene after the user clicks a difficulty level
-    // second argument is the difficulty
+    // second argument is the difficulty (numbers were selected for scoring purposes)
     // (1: easy, 1.5: medium, 2: hard, 2.5: very hard, 3: impossible)
 
     // Easy

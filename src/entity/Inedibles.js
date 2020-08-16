@@ -6,7 +6,6 @@ export default class Edibles extends Phaser.Physics.Arcade.Sprite {
 
     this.scene = scene;
     this.scene.physics.world.enable(this);
-    // assign the object to scene using add.existing()
     this.scene.add.existing(this);
   }
 }
