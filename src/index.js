@@ -18,6 +18,7 @@ import BgScene from "./scenes/BgScene";
 import FgScene from "./scenes/FgScene";
 import GameOverScene from "./scenes/GameoverScene";
 import IntroScene from "./scenes/IntroScene";
+import InformationScene from "./scenes/InformationScene";
 
 class Game extends Phaser.Game {
   constructor() {
@@ -30,6 +31,7 @@ class Game extends Phaser.Game {
     this.scene.add("MainScene", MainScene);
     this.scene.add("GameOverScene", GameOverScene);
     this.scene.add("IntroScene", IntroScene);
+    this.scene.add("InformationScene", InformationScene);
 
     // Start the intro scene
     this.scene.start("IntroScene");

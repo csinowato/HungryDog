@@ -20,6 +20,7 @@ export default class IntroScene extends Phaser.Scene {
     this.load.image("button", "assets/sprites/button.png");
     this.load.image("introDog", "assets/sprites/introDog.png");
     this.load.image("border", "assets/backgrounds/borderframe.png");
+    this.load.image("info", "assets/sprites/info.png");
   }
 
   create() {
@@ -93,6 +94,13 @@ export default class IntroScene extends Phaser.Scene {
     // Impossible
     this.buttonsGroup.children.entries[4].on("pointerdown", () => {
       this.scene.start("MainScene", 3);
+    });
+
+    this.infoButton = new Button(this, 900, 500, "info")
+      .setScale(0.08)
+      .setInteractive();
+    this.infoButton.on("pointerdown", () => {
+      this.scene.start("InformationScene");
     });
   }
 }
