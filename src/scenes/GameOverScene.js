@@ -45,21 +45,17 @@ export default class GameOverScene extends Phaser.Scene {
       .setOrigin(0.5);
     scoreText.setShadow(2, 2, "DarkSlateGray", 2);
 
-    this.playAgainButton = new Button(
-      this,
-      xAxisCenter,
-      430,
-      "button"
-    ).setScale(0.28);
+    this.playAgainButton = new Button(this, xAxisCenter, 430, "button")
+      .setScale(0.28)
+      .setInteractive(); //allows user to click
 
     let buttonText = this.add
-      .text(xAxisCenter, 430, "Play Again", textStyling)
+      .text(xAxisCenter, 428, "Play Again", textStyling)
       .setOrigin(0.5);
     buttonText.setShadow(2, 2, "DarkSlateGray", 5);
 
     // If play again button is clicked, go back to intro page
     this.playAgainButton.on("pointerdown", () => {
-      console.log("---- PLAY AGAIN ---");
       this.scene.start("IntroScene");
     });
   }
