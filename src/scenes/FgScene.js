@@ -3,12 +3,11 @@ import Player from "../entity/Player";
 import Ground from "../entity/Ground";
 import Edibles from "../entity/Edibles";
 import Inedibles from "../entity/Inedibles";
-
-let score = 0;
-let scoreText;
+import Hearts from "../entity/Hearts";
 
 let lives = 3;
-let livesText;
+let score = 0;
+let scoreText;
 
 let dropDelay = 4000;
 
@@ -23,6 +22,7 @@ export default class FgScene extends Phaser.Scene {
 
   preload() {
     this.load.image("ground", "assets/sprites/ground2.png");
+    this.load.image("hearts", "assets/sprites/heart.png");
 
     // Preload edibles
     this.load.image("apple", "assets/sprites/edible/apple.png");
@@ -54,10 +54,11 @@ export default class FgScene extends Phaser.Scene {
     });
     scoreText.setShadow(2, 2, "DarkSlateGray", 2);
 
-    //create livestext
-    livesText = this.add.text(16, 50, "lives: 3", {
-      fontSize: "30px",
+    //create box for lives
+    livesText = this.add.text(16, 60, "      ", {
+      fontSize: "36px",
       fill: "#000",
+      backgroundColor: "white",
     });
 
     // Create ground group
@@ -87,6 +88,10 @@ export default class FgScene extends Phaser.Scene {
     this.groundGroup.create(x, y, "ground").setScale(0.6).refreshBody();
   }
 
+  createHearts(x, y) {
+    this.heartsGroup.create(x, y, "hearts").setScale(0.05);
+  }
+
   // Helper function to drop edible objects
   createEdibles(x, y) {
     // Make object dropped random
@@ -107,9 +112,14 @@ export default class FgScene extends Phaser.Scene {
     this.groundGroup = this.physics.add.staticGroup({ classType: Ground });
     this.createGround(480, 560);
 
+    this.heartsGroup = this.physics.add.staticGroup({ classType: Hearts });
+    this.createHearts(40, 80);
+    this.createHearts(82, 80);
+    this.createHearts(124, 80);
+
     this.ediblesGroup = this.physics.add.group({ classType: Edibles });
     // Drop one edible food immediately when game starts
-    let edibleXaxis = Math.floor(Math.random() * 1000);
+    let edibleXaxis = Math.floor(Math.random() * 950) + 20;
     this.createEdibles(edibleXaxis, 0);
 
     this.inediblesGroup = this.physics.add.group({ classType: Inedibles });
@@ -125,7 +135,7 @@ export default class FgScene extends Phaser.Scene {
 
   //Helper function for continuously dropping items
   itemDrop() {
-    let xAxis = Math.floor(Math.random() * 950);
+    let xAxis = Math.floor(Math.random() * 950) + 20;
     let edibleOrInedible = Math.floor(Math.random() * 3);
     // create and drop inedible food 1/3 of the time
     if (edibleOrInedible === 2) {
@@ -194,6 +204,8 @@ export default class FgScene extends Phaser.Scene {
     player.setTint(0xce6161);
     inedible.disableBody(true, true);
     lives -= 1;
-    livesText.setText(`lives: ${lives}`);
+
+    // console.log(this.heartsGroup.children.entries[0]);
+    this.heartsGroup.children.entries[lives].destroy();
   }
 }
