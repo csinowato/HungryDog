@@ -1,6 +1,12 @@
 import "phaser";
 import Button from "../entity/Button";
 
+let textStyling = {
+  fontFamily: "Tahoma",
+  fontSize: "24px",
+  fill: "white",
+};
+
 export default class IntroScene extends Phaser.Scene {
   constructor() {
     super("IntroScene");
@@ -21,7 +27,20 @@ export default class IntroScene extends Phaser.Scene {
     this.add.image(0, -100, "clouds2").setOrigin(0).setScale(0.6);
     this.add.image(-10, 350, "mountains").setOrigin(0).setScale(0.6);
 
-    // this.scene.start("MainScene"); //UNCOMMENT TO START MAIN SCENE ----->
+    let title = this.add.text(250, 50, "HUNGRY DOG", {
+      fontFamily: "Tahoma",
+      fontSize: "80px",
+      fill: "white",
+    });
+    title.setShadow(2, 2, "DarkSlateGray", 5);
+
+    let description = this.add.text(250, 190, "Select a level to play", {
+      fontFamily: "Tahoma",
+      fontSize: "28px",
+      fill: "white",
+    });
+    description.setShadow(2, 2, "DarkSlateGray", 5);
+
     this.buttonsGroup = this.physics.add.staticGroup({ classType: Button });
     this.createButton(700, 220);
     this.createButton(700, 290);
@@ -29,32 +48,42 @@ export default class IntroScene extends Phaser.Scene {
     this.createButton(700, 430);
     this.createButton(700, 500);
 
-    //Easy
+    let easy = this.add.text(675, 204, "Easy", textStyling);
+    let medium = this.add.text(658, 274, "Medium", textStyling);
+    let hard = this.add.text(675, 344, "Hard", textStyling);
+    let veryHard = this.add.text(647, 414, "Very Hard", textStyling);
+    let impossible = this.add.text(642, 484, "Impossible", textStyling);
+
+    let levels = [easy, medium, hard, veryHard, impossible];
+    levels.forEach((i) => i.setShadow(2, 2, "DarkSlateGray", 5));
+
+    // Easy
     this.buttonsGroup.children.entries[0].on("pointerdown", () => {
       this.scene.start("MainScene", 1);
     });
 
-    //Medium
+    // Medium
     this.buttonsGroup.children.entries[1].on("pointerdown", () => {
       this.scene.start("MainScene", 1.5);
     });
 
-    //Hard
+    // Hard
     this.buttonsGroup.children.entries[2].on("pointerdown", () => {
       this.scene.start("MainScene", 2);
     });
 
-    //Very Hard
+    // Very Hard
     this.buttonsGroup.children.entries[3].on("pointerdown", () => {
       this.scene.start("MainScene", 2.5);
     });
 
-    //Impossible
+    // Impossible
     this.buttonsGroup.children.entries[4].on("pointerdown", () => {
       this.scene.start("MainScene", 3);
     });
   }
 
+  // Helper function
   createButton(x, y) {
     this.buttonsGroup.create(x, y, "button").setScale(0.25).setInteractive();
   }

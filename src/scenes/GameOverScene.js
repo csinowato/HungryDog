@@ -1,4 +1,4 @@
-import "phaser"; //THIS SCENE IS NOT GETTING CALLED ----------------------------------------
+import "phaser";
 
 let scoreData;
 let scoreText;
