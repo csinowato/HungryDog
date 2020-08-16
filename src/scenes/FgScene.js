@@ -46,6 +46,10 @@ export default class FgScene extends Phaser.Scene {
       frameWidth: 300,
       frameHeight: 400,
     });
+
+    // Preload sounds
+    this.load.audio("hit", "assets/audio/hit.wav");
+    this.load.audio("collect", "assets/audio/collect2.wav");
   }
 
   create(difficulty) {
@@ -96,6 +100,10 @@ export default class FgScene extends Phaser.Scene {
 
     // Create collisions for all entities
     this.createCollisions();
+
+    // Sounds
+    this.hitSound = this.sound.add("hit");
+    this.collectSound = this.sound.add("collect");
   }
 
   update(time, delta) {
@@ -214,6 +222,7 @@ export default class FgScene extends Phaser.Scene {
 
   // when player collects edible food, make food disappear, and increase score
   collectEdibles(player, edible) {
+    this.collectSound.play();
     player.clearTint();
     edible.disableBody(true, true);
     score += difficultyLvl * 10;
@@ -222,6 +231,7 @@ export default class FgScene extends Phaser.Scene {
 
   // if player catches inedible food, make food disappear, decrease lives
   collectInedibles(player, inedible) {
+    this.hitSound.play();
     player.setTint(0xce6161);
     inedible.disableBody(true, true);
     lives -= 1;
