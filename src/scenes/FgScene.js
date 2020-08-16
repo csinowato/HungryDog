@@ -108,10 +108,6 @@ export default class FgScene extends Phaser.Scene {
     this.groundGroup.create(x, y, "ground").setScale(0.6).refreshBody();
   }
 
-  createHearts(x, y) {
-    this.heartsGroup.create(x, y, "hearts").setScale(0.05);
-  }
-
   // Helper function to drop edible objects
   createEdibles(x, y) {
     // Make object dropped random
@@ -132,10 +128,16 @@ export default class FgScene extends Phaser.Scene {
     this.groundGroup = this.physics.add.staticGroup({ classType: Ground });
     this.createGround(480, 560);
 
-    this.heartsGroup = this.physics.add.staticGroup({ classType: Hearts });
-    this.createHearts(40, 80);
-    this.createHearts(82, 80);
-    this.createHearts(124, 80);
+    this.heartsGroup = this.physics.add.staticGroup({
+      classType: Hearts,
+      key: "hearts",
+      repeat: 2,
+      setXY: { x: 40, y: 80, stepX: 42 }, // hearts are placed 42 pixels apart
+    });
+
+    this.heartsGroup.children.iterate((child) => {
+      child.setScale(0.05);
+    });
 
     this.ediblesGroup = this.physics.add.group({ classType: Edibles });
     // Drop one edible food immediately when game starts
@@ -223,7 +225,6 @@ export default class FgScene extends Phaser.Scene {
     player.setTint(0xce6161);
     inedible.disableBody(true, true);
     lives -= 1;
-    this.player.setBounce(0.2);
 
     this.heartsGroup.children.entries[lives].destroy();
 

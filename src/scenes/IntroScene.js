@@ -45,12 +45,17 @@ export default class IntroScene extends Phaser.Scene {
     });
     description.setShadow(2, 2, "DarkSlateGray", 5);
 
-    this.buttonsGroup = this.physics.add.staticGroup({ classType: Button });
-    this.createButton(700, 220);
-    this.createButton(700, 290);
-    this.createButton(700, 360);
-    this.createButton(700, 430);
-    this.createButton(700, 500);
+    // Create buttons menu
+    this.buttonsGroup = this.physics.add.staticGroup({
+      classType: Button,
+      key: "button",
+      repeat: 4,
+      setXY: { x: 700, y: 220, stepY: 70 }, // hearts are placed 70 pixels apart
+    });
+
+    this.buttonsGroup.children.iterate((child) => {
+      child.setScale(0.25).setInteractive(); // Enable user to click
+    });
 
     let easy = this.add.text(675, 204, "Easy", textStyling);
     let medium = this.add.text(658, 274, "Medium", textStyling);
@@ -89,10 +94,5 @@ export default class IntroScene extends Phaser.Scene {
     this.buttonsGroup.children.entries[4].on("pointerdown", () => {
       this.scene.start("MainScene", 3);
     });
-  }
-
-  // Helper function
-  createButton(x, y) {
-    this.buttonsGroup.create(x, y, "button").setScale(0.25).setInteractive();
   }
 }
