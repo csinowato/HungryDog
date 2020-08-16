@@ -48,7 +48,7 @@ export default class FgScene extends Phaser.Scene {
 
   create(difficulty) {
     console.log("DIFFICULTY --->", difficulty); //TESTING ---------------------------------------------------------------
-    // Adjusting difficulty to user specified level (1: easy, 1.5: medium, 2: hard, 2.5: superhard, 3: impossible)
+    // Adjusting difficulty to user specified level (1: easy, 1.5: medium, 2: hard, 2.5: very hard, 3: impossible)
     // Map difficulty to dropDelay and update global difficultyLvl
     let difficultyToDelay = { 1: 2000, 1.5: 1000, 2: 500, 2.5: 200, 3: 100 };
     dropDelay = difficultyToDelay[difficulty];

@@ -31,7 +31,7 @@ class Game extends Phaser.Game {
 
     // Start the game with the mainscene
     // second argument is the difficulty
-    // (1: easy, 1.5: medium, 2: hard, 2.5: superhard, 3: impossible)
+    // (1: easy, 1.5: medium, 2: hard, 2.5: very hard, 3: impossible)
     this.scene.start("MainScene", 1);
   }
 }

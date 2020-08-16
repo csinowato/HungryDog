@@ -33,7 +33,7 @@ export default class GameOverScene extends Phaser.Scene {
     });
     gameOver.setShadow(2, 2, "DarkSlateGray", 5);
 
-    scoreText = this.add.text(400, 300, `Score: ${scoreData}`, {
+    scoreText = this.add.text(410, 300, `Score: ${scoreData}`, {
       fontFamily: "Tahoma",
       fontSize: "45px",
       fill: "white",
