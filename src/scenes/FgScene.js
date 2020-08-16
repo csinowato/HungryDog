@@ -47,10 +47,12 @@ export default class FgScene extends Phaser.Scene {
 
   create() {
     //create scoretext
-    scoreText = this.add.text(16, 16, "score: 0", {
+    scoreText = this.add.text(20, 15, "score: 0", {
+      fontFamily: "Tahoma",
       fontSize: "30px",
-      fill: "#000",
+      fill: "white",
     });
+    scoreText.setShadow(2, 2, "DarkSlateGray", 2);
 
     //create livestext
     livesText = this.add.text(16, 50, "lives: 3", {
