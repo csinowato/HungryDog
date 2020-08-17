@@ -7,14 +7,20 @@ module.exports = {
   entry: "./src/index.js",
 
   // devServer: {
-  //   contentBase: './public',
+  //   contentBase: "./public",
   //   inline: true,
-  //   hot: true
+  //   hot: true,
   // },
+
   output: {
     path: path.resolve(__dirname, "public"),
     publicPath: "/public/",
     filename: "bundle.js",
+  },
+
+  devServer: {
+    publicPath: "/",
+    contentBase: "./public",
   },
 
   module: {
