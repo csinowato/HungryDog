@@ -1,7 +1,7 @@
 {
-  "name": "PhaserWorkshop",
+  "name": "Stackathon",
   "version": "1.0.0",
-  "description": "A workshop for getting started with Phaser",
+  "description": "Stackathon Project",
   "main": "src/index.js",
   "scripts": {
     "start": "webpack-dev-server",
