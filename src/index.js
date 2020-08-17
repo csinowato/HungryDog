@@ -16,7 +16,7 @@ import config from "./config/config";
 import MainScene from "./scenes/MainScene";
 import BgScene from "./scenes/BgScene";
 import FgScene from "./scenes/FgScene";
-import GameOverScene from "./scenes/GameoverScene";
+import GameOverScene from "./scenes/GameOverScene";
 import IntroScene from "./scenes/IntroScene";
 import InformationScene from "./scenes/InformationScene";
 
