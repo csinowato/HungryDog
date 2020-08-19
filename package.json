@@ -1,7 +1,7 @@
 {
-  "name": "Stackathon",
+  "name": "HungryDog",
   "version": "1.0.0",
-  "description": "Stackathon Project",
+  "description": "4-day Hackathon Project",
   "main": "src/index.js",
   "scripts": {
     "start": "node server.js",
